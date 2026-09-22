@@ -24,8 +24,7 @@ total bandwidth is driven by `c` (the number of ciphertexts), not by image size.
 |---|---|
 | `grayscale.py` | Grayscale baseline pipeline — compress, encrypt, homomorphic decompress → process (pixel-wise or 3×3 convolution) → recompress, decrypt, reconstruct. |
 | `rgb_two_cipher.py` | RGB extension: converts to YCrCb, subsamples chroma 4:2:0, and packs Y, Cr, and Cb into **two** different ciphertext set using pixel brightening as the pointwise operation. Useful for operations that should be applied separately to Luminance and Chrominance.  |
-| `rgb_maxpack_1024.py` | RGB extension: converts to YCrCb, subsamples chroma 4:2:0, and packs Y, Cr, and Cb into a **single** ciphertext set using pixel inversion as the pointwise opeartion (the same affine transform for luma and chroma, so no per-channel masking is needed). Adds dynamic CKKS context sizing so 1024×1024 images are supported alongside 256/512. |
-counts per image size and block size, and known caveats. |
+| `rgb_maxpack_1024.py` | RGB extension: converts to YCrCb, subsamples chroma 4:2:0, and packs Y, Cr, and Cb into a **single** ciphertext set using pixel inversion as the pointwise opeartion (the same affine transform for luma and chroma, so no per-channel masking is needed). Adds dynamic CKKS context sizing so 1024×1024 images are supported alongside 256/512. 
 | `images/` | Place your own test images here (see Usage below). Our used test images are shared in this folder. |
 
 ## Requirements
