@@ -7,7 +7,7 @@ compression scheme described in *"Convolution-Friendly Image Compression with FH
 
 This repo contains a grayscale baseline plus a progression of RGB extensions that
 reduce homomorphic bandwidth well below the naive "encrypt each channel separately"
-approach, culminating in a version that supports 1024×1024 images.
+approach, culminating in a version that supports 1024×1024×3 images. Also the sample images that we used are provided for reference.
 
 ## Idea in one paragraph
 
@@ -22,15 +22,11 @@ total bandwidth is driven by `c` (the number of ciphertexts), not by image size.
 
 | File | Description |
 |---|---|
-| `btp_local.py` | Grayscale baseline pipeline — compress, encrypt, homomorphic decompress → process (pixel-wise or 3×3 convolution) → recompress, decrypt, reconstruct. |
-| `btp_local_rgb_maxpack_1024.py` | RGB extension: converts to YCrCb, subsamples chroma 4:2:0, and packs Y, Cr, and Cb into a **single** ciphertext set using pixel inversion as the pointwise op (the same affine transform for luma and chroma, so no per-channel masking is needed). Adds dynamic CKKS context sizing so 1024×1024 images are supported alongside 256/512. |
-| `BTP_project_handoff.md` | Detailed design notes: parameter choices, the RGB packing progression, verified slot/chunk counts per image size and block size, and known caveats. |
-| `images/` | Place your own test images here (see Usage below). Not included in this repo by default — see `.gitignore`. |
-
-Earlier intermediate stages (naive 3-channel encryption, and a "Y separate / Cr+Cb
-packed" 2c-ciphertext version) are described in the handoff document for anyone who
-wants to reproduce the full comparison, even though only the final maximum-packing
-version is kept as a runnable script here.
+| `grayscale.py` | Grayscale baseline pipeline — compress, encrypt, homomorphic decompress → process (pixel-wise or 3×3 convolution) → recompress, decrypt, reconstruct. |
+| `rgb_two_cipher.py` | RGB extension: converts to YCrCb, subsamples chroma 4:2:0, and packs Y, Cr, and Cb into **two** different ciphertext set using pixel brightening as the pointwise operation. Useful for operations that should be applied separately to Luminance and Chrominance.  |
+| `rgb_maxpack_1024.py` | RGB extension: converts to YCrCb, subsamples chroma 4:2:0, and packs Y, Cr, and Cb into a **single** ciphertext set using pixel inversion as the pointwise opeartion (the same affine transform for luma and chroma, so no per-channel masking is needed). Adds dynamic CKKS context sizing so 1024×1024 images are supported alongside 256/512. |
+counts per image size and block size, and known caveats. |
+| `images/` | Place your own test images here (see Usage below). Our used test images are shared in this folder. |
 
 ## Requirements
 
@@ -52,7 +48,7 @@ everything else is standard scientific Python.
 3. Run the script and answer the interactive prompts:
 
 ```bash
-python btp_local_rgb_maxpack_1024.py
+python rgb_maxpack_1024.py
 ```
 
 You'll be asked for:
@@ -67,11 +63,11 @@ reconstructed image side by side.
 
 ## Known limitations
 
-- 1024×1024 with `m=8` needs TenSEAL's automatic multi-ciphertext chunking and does
+- 1024×1024×3 with `m=8` needs TenSEAL's automatic multi-ciphertext chunking and does
   not reach the full 3× bandwidth saving that every other supported combination gets
   (still a real 25–33% saving vs. naive per-channel encryption). Use `m=16` at 1024px
   if the full 3× saving matters more than the smaller block size.
-- 2048×2048 is not currently supported.
+- 2048×2048×3 is not currently supported.
 
 ## License
 
