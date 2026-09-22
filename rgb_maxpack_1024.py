@@ -60,10 +60,8 @@
 #  WHY THE CONTEXT SIZE IS CHOSEN DYNAMICALLY, AND WHAT HAPPENS AT 1024px
 #      Packing three channels means total slots needed = Y_blocks +
 #      2 x chroma_blocks. generate_ckks_context() tries poly_modulus_degree
-#      =16384 (8,192 slots) first, then 32768 (16,384 slots) if that's not
-#      enough — mirroring the exact auto-scaling idea in the authors' own
-#      C++ code (their `while(num_Blocks > slots) { depth += 1; ... }`
-#      loop). Full slot table (verified against the actual block-count
+#      =16384 (8,192 slots) first, then 32768 (16,384 slots).
+#      Full slot table (verified against the actual block-count
 #      function, not hand math):
 #
 #        size   m   op            Y blocks  chroma(ea)  packed total  fits in
