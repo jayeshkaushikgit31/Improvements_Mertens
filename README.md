@@ -1,6 +1,6 @@
 # FHE Convolution-Friendly Image Compression Pipeline
 
-A Python/TenSEAL reimplementation and extension of the JPEG-inspired, CKKS-based image
+A Python/TenSEAL analysis and extension of the JPEG-inspired, CKKS-based image
 compression scheme described in *"Convolution-Friendly Image Compression with FHE"*
 (Mertens, Nicolas, Rovira - COSIC, KU Leuven / TII). Reference C++ implementation:
 [KULeuven-COSIC/img-processing-fhe](https://github.com/KULeuven-COSIC/img-processing-fhe).
@@ -72,7 +72,6 @@ reconstructed image side by side.
   (still a real 25–33% saving vs. naive per-channel encryption). Use `m=16` at 1024px
   if the full 3× saving matters more than the smaller block size.
 - 2048×2048 is not currently supported.
-- See `BTP_project_handoff.md` for the full list of design trade-offs and caveats.
 
 ## License
 
