@@ -2,7 +2,7 @@
 
 A Python/TenSEAL reimplementation and extension of the JPEG-inspired, CKKS-based image
 compression scheme described in *"Convolution-Friendly Image Compression with FHE"*
-(Mertens, Nicolas, Rovira — COSIC, KU Leuven / TII). Reference C++ implementation:
+(Mertens, Nicolas, Rovira - COSIC, KU Leuven / TII). Reference C++ implementation:
 [KULeuven-COSIC/img-processing-fhe](https://github.com/KULeuven-COSIC/img-processing-fhe).
 
 This repo contains a grayscale baseline plus a progression of RGB extensions that
