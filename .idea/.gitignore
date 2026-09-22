@@ -3,6 +3,7 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -18,7 +19,3 @@ env/
 # OS
 .DS_Store
 Thumbs.db
-
-# Test images (uncomment if you don't want to publish sample images publicly)
-# images/*.png
-# images/*.jpg
